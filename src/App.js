@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
+import advicesAPI from './advicesAPI.json'
 import './App.css';
 
 function App() {
+  const [randomAdvice, setRandomAdvice] = useState("");
+  const [randomIndex, setRandomIndex] = useState(null);
+  function handleClick() {
+    const index = Math.floor(Math.random() * advicesAPI.advices.length);
+    setRandomIndex(index);
+    setRandomAdvice(advicesAPI.advices[index]);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+      <div className='content'>
+        <h4 className="head">Advice # {randomIndex + 1}</h4>
+        <p className="advice">
+          " {randomAdvice} "
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div className='hr-container'>
+          <hr></hr>
+          <span className='pause-icon'></span>
+        </div>
+        <button onClick={handleClick} className='btn'></button>
+
+      </div>
+
     </div>
+
   );
 }
 
